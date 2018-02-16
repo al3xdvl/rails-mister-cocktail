@@ -1,0 +1,26 @@
+ul {
+  list-style: none;
+}
+
+.card-show h2 {
+  color: #9C003B;
+  font-size: 50px !important;
+  top: 20px;
+  left: 20px;
+}
+
+.card-show {
+  height: 454px;
+}
+
+.card-description-show {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 25px;
+}
+
+.card-description-show p {
+  opacity: 0.7;
+  font-weight: lighter;
+}

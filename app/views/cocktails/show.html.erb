@@ -1,0 +1,31 @@
+
+
+<% url =  File.file?("#{Rails.root}/app/assets/images/#{@cocktail.id}.jpg") ? image_path("#{@cocktail.id}.jpg") : image_path('default.jpg') %>
+<div class="container">
+  <div class="card card-show" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= url %>);">
+
+
+    <h2 class="card-category"><%= @cocktail.name %></h2>
+    <div class="card-description-show">
+      <% @cocktail.doses.each do |dose| %>
+      <p><%= dose.ingredient.name %> - <%= dose.description %> - <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, dose_path(dose.id),
+                    method: :delete,
+                    data: { confirm: "Do you really want to delete this?" } %></p>
+
+      <% end %>
+    </div>
+ </div>
+
+  <%= link_to "Go back to the list", cocktails_path, class: "btn btn-primary" %>
+
+<div class="container">
+<h1>Add a new ingredient</h1>
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+  <%= f.association :ingredient, collection: Ingredient.all.order(:name) %>
+  <%= f.input :description %>
+  <%= f.submit "Add an ingredient", class: "btn btn-primary" %>
+<% end %>
+</div>
+
+<hr>
+

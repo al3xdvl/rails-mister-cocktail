@@ -1,0 +1,35 @@
+
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= image_path('cocktails.jpg')%>);">
+<div class="banner-content">
+  <h1>All our cocktails</h1>
+  <p>Learn to make nice cocktails</p>
+</div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <% @cocktails.each do |cocktail| %>
+    <% url =  File.file?("#{Rails.root}/app/assets/images/#{cocktail.id}.jpg") ? image_path("#{cocktail.id}.jpg") : image_path('default.jpg') %>
+      <div class="col-xs-12 col-sm-3">
+        <div class="card text-center" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= url %>);">
+          <div class="card-header">
+            <h2 class="card-category">
+              <%= link_to cocktail.name, cocktail_path(cocktail) %>
+            </h2>
+            <div class="card-description">
+              <% cocktail.doses.each do |dose| %>
+                <p>
+                  <%= dose.ingredient.name %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<%= link_to "Add a cocktail", new_cocktail_path, class: "btn btn-primary" %>
+</div>
+
+
